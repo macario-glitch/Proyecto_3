@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Cliente;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pedido>
@@ -17,16 +17,11 @@ class PedidoFactory extends Factory
      */
     public function definition(): array
     {
-        $cliente = Cliente::inRandomOrder()->first();
+        $user = User::inRandomOrder()->first();
 
         return [
             'total' => $this->faker->randomFloat(2),
-            'id_cliente' => $cliente->id,
-            /*'id_cliente' => function()
-            {
-                return Cliente::factory()->create()->id;
-            }*/
-
+            'id_usuario' => $user->id,
         ];
     }
 }

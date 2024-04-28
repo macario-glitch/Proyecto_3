@@ -14,9 +14,9 @@ class Pedido extends Model
     ];
 
     //un pedido pertenece a un cliente
-    public function cliente()
+    public function user()
     {
-        return $this->belongsTo(Cliente::class, 'id_cliente', 'id');
+        return $this->belongsTo(User::class, 'id_usuario', 'id');
     }
 
     public function productos()

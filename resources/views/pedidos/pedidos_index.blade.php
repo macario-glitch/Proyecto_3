@@ -18,14 +18,18 @@
             @foreach($pedidos as $pedido)
             <tr>
                 <td>{{$pedido->id}}</td>
-                <td>{{$pedido->id_cliente}}</td>
-                <td>{{$pedido->cliente->nombre}}</td>
+                <td>{{$pedido->id_usuario}}</td>
+                <td>{{$pedido->user->name}}</td>
                 <td>{{$pedido->total}}</td>
-                {{--
-                    <td><a href="{{ route('pedidos.show', $cliente->id) }}">Info..</a></td> 
-                --}}
                 <td>{{ $pedido->created_at ? $pedido->created_at->format('d/m/Y H:i:s') : '-' }}</td>
                 <td>{{ $pedido->updated_at ? $pedido->updated_at->diffForHumans() : '-' }}</td>
+                <td>
+                    <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
+                </td>
 
             </tr>
             @endforeach

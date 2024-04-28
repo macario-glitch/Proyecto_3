@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_cliente')->constrained('clientes')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
 	        $table->float('total');
             $table->timestamps();
         });
