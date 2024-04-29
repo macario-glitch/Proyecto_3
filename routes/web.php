@@ -21,3 +21,13 @@ Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedi
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('productos.show');
 Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
