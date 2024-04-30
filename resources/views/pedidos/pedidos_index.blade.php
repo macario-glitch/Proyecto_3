@@ -9,6 +9,7 @@
                 <th>ID del Cliente</th>
                 <th>Nombre de Cliente</th>
                 <th>Total del Pedido</th>
+                <th>Contenido</th>
                 <th>Creado</th>
                 <th>Modificaciones</th>
                 <th>Acciones</th>
@@ -21,6 +22,7 @@
                 <td>{{$pedido->id_usuario}}</td>
                 <td>{{$pedido->user->name}}</td>
                 <td>{{$pedido->total}}</td>
+                <td><a href="{{ route('pedidos_productos.show', $pedido->id) }}">Info..</a></td>
                 <td>{{ $pedido->created_at ? $pedido->created_at->format('d/m/Y H:i:s') : '-' }}</td>
                 <td>{{ $pedido->updated_at ? $pedido->updated_at->diffForHumans() : '-' }}</td>
                 <td>

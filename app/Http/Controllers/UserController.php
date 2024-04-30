@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+
+use function Laravel\Prompts\error;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::select('id', 'name', 'email','email_verified_at', 'password', 'role', 'profile_photo_path', 'created_at', 'updated_at')->orderBy('id', 'asc')->orderBy('updated_at', 'asc')->get();
+        $users = User::select('id', 'name', 'email', 'email_verified_at', 'password', 'role', 'profile_photo_path', 'created_at', 'updated_at')->orderBy('id', 'asc')->orderBy('updated_at', 'asc')->get();
         return view("usuario.usuario_index", compact('users'));
     }
 

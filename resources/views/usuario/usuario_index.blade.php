@@ -1,5 +1,4 @@
 <x-vista-principal>
-
     <h1>Users Y Pedidos 1:M</h1>
 
     <table class="table-fixed w-full table">
@@ -43,5 +42,4 @@
             @endforeach
         </tbody>
     </table>
-
 </x-vista-principal>

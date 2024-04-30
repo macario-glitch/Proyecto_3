@@ -20,6 +20,7 @@ class PedidoController extends Controller
         $usuario = User::find($usuario_id);
         $pedidos_info = $usuario->pedidos;
         $nombre = $usuario->name;
+        
         return view('pedidos.pedidos_show', compact('pedidos_info', 'nombre'));
     }
 

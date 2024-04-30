@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Vista-Principal extends Component
+class VistaPrincipal extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class Vista-Principal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.vista--principal');
+        return view('components.vista-principal');
     }
 }

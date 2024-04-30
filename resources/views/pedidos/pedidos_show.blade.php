@@ -2,7 +2,7 @@
 
 <h1>{{ $nombre }}</h1>
 
-@if($pedidos_info->isNotEmpty())
+@if($pedidos_info->isnotEmpty())
     <h2>Pedidos:</h2>
     <ul>
         @foreach ($pedidos_info as $pedido)
