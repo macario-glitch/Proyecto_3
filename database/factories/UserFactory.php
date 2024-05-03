@@ -35,7 +35,6 @@ class UserFactory extends Factory
             'role' => $this->faker->randomElement(['Cliente', 'Admin']),
             'two_factor_recovery_codes' => null,
             'remember_token' => Str::random(10),
-            'profile_photo_path' => 'default.jpg',
             'current_team_id' => null,
         ];
     }

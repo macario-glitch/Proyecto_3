@@ -1,12 +1,11 @@
 <x-vista-principal>
+    <h1>Edita el Producto</h1> <br>
 
-    <h1>Editar Producto</h1> <br>
-    <form class="form" action="{{ route('productos.update', $producto) }}" method="POST">
+    <form class="form" action="{{ route('productos.update', $producto->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
 
-        <input class="form-control" type="text" name="nombre" placeholder="nombre" value="{{ $producto->nombre }}" required maxlength="255" />
-        <label class="form-label" for="nombre">Nombre:</label> <br><br>
+        <input class="form-control" style="margin-bottom: 2vh;" type="text" name="nombre" placeholder="Ingrese el Nombre" value="{{ $producto->nombre }}" required maxlength="255" />
         @error('nombre')
         <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
             <i class="bi bi-exclamation-triangle me-1"></i>
@@ -14,16 +13,24 @@
         </div>
         @enderror
 
-        <input class="form-control" type="number" name="precio" value="{{ $producto->precio }}" required maxlength="255" />
-        <label class="form-label" for="precio">Precio:</label> <br><br>
+        <input class="form-control" style="margin-bottom: 2vh;" type="number" name="precio" placeholder="Coloque un Precio" value="{{ $producto->precio }}" required/>
         @error('precio')
         <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
             <i class="bi bi-exclamation-triangle me-1"></i>
-            <strong>Error.</strong> El precio es invalido.
+            <strong>Error.</strong> El precio es inválido.
         </div>
         @enderror
 
-        <button type="submit">Guardar</button>
-    </form>
+        <input class="form-control" style="margin-bottom: 2vh;" type="text" name="descripcion" placeholder="Descripción del Producto" value="{{ $producto->descripcion }}" required/>
+        @error('descripcion')
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            <i class="bi bi-exclamation-triangle me-1"></i>
+            <strong>Error.</strong> La descripción es inválida.
+        </div>
+        @enderror
 
+        <input class="form-control" style="margin-bottom: 2vh;" type="file" name="photo_path" accept="image/*"/>
+
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </form>
 </x-vista-principal>

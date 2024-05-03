@@ -1,16 +1,28 @@
 <x-vista-principal>
 
-<h1>{{ $nombre }}</h1>
+    <h1>{{ $nombre }}</h1> <br>
 
-@if($pedidos_info->isnotEmpty())
+    @if($pedidos_info->isnotEmpty())
     <h2>Pedidos:</h2>
-    <ul>
-        @foreach ($pedidos_info as $pedido)
-        <li>{{ $pedido->id }} - {{ $pedido->total }}</li>
-        @endforeach
-    </ul>
-@else
+
+    <table class="table-fixed w-full table">
+        <thead>
+            <tr>
+                <th>ID del Pedido</th>
+                <th>Total del Pedido</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($pedidos_info as $pedido)
+            <tr>
+                <td>{{ $pedido->id }}</td>
+                <td>$ {{ $pedido->total }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @else
     <h3>No hay pedidos</h3>
-@endif
+    @endif
 
 </x-vista-principal>

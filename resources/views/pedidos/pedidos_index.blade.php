@@ -1,7 +1,16 @@
 <x-vista-principal>
 
-    <h1>Clientes Y Pedidos 1:M</h1>
+    <h1>Clientes & Pedidos 1:M, Pedido & Producto M:N</h1>
 
+    @if(session('success'))
+    <br>
+    <div class="alert alert-success">
+        <i class="bi bi-emoji-grin-fill"></i>
+        <strong>Exito!</strong> {{ session('success') }} !
+    </div>
+    @endif
+
+    <br>
     <table class="table-fixed w-full table">
         <thead>
             <tr>
@@ -11,7 +20,6 @@
                 <th>Total del Pedido</th>
                 <th>Contenido</th>
                 <th>Creado</th>
-                <th>Modificaciones</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -21,10 +29,9 @@
                 <td>{{$pedido->id}}</td>
                 <td>{{$pedido->id_usuario}}</td>
                 <td>{{$pedido->user->name}}</td>
-                <td>{{$pedido->total}}</td>
+                <td>$ {{$pedido->total}}</td>
                 <td><a href="{{ route('pedidos_productos.show', $pedido->id) }}">Info..</a></td>
                 <td>{{ $pedido->created_at ? $pedido->created_at->format('d/m/Y H:i:s') : '-' }}</td>
-                <td>{{ $pedido->updated_at ? $pedido->updated_at->diffForHumans() : '-' }}</td>
                 <td>
                     <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST">
                         @csrf

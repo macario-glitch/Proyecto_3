@@ -1,10 +1,11 @@
 <x-vista-principal>
 
-    <form class="form" action="{{ route('productos.store') }}" method="POST">
+<h1>Crea un Nuevo Producto</h1> <br>
+
+    <form class="form" action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        <input class="form-control" type="text" name="nombre" placeholder="nombre" required maxlength="255" />
-        <label class="form-label" for="nombre">Nombre:</label> <br><br>
+        <input class="form-control" style="margin-bottom: 2vh;" type="text" name="nombre" placeholder="Ingrese el Nombre" required maxlength="255" />
         @error('nombre')
         <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
             <i class="bi bi-exclamation-triangle me-1"></i>
@@ -12,17 +13,24 @@
         </div>
         @enderror
 
-        <input class="form-control" type="number" name="precio" placeholder="precio" required maxlength="255" />
-        <label class="form-label" for="precio">Precio:</label> <br><br>
+        <input class="form-control" style="margin-bottom: 2vh;" type="number" name="precio" placeholder="Coloque un Precio" required/>
         @error('precio')
         <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
             <i class="bi bi-exclamation-triangle me-1"></i>
-            <strong>Error.</strong> El precio es invalido.
+            <strong>Error.</strong> El precio es inválido.
         </div>
         @enderror
 
-        <button type="submit">Guardar</button>
+        <input class="form-control" style="margin-bottom: 2vh;" type="text" name="descripcion" placeholder="Descripción del Producto" required/>
+        @error('descripcion')
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            <i class="bi bi-exclamation-triangle me-1"></i>
+            <strong>Error.</strong> La descripción es inválida.
+        </div>
+        @enderror
+
+        <input class="form-control" style="margin-bottom: 2vh;" type="file" name="photo_path" accept="image/*" required/>
+
+        <button class="btn btn-primary" type="submit">Guardar</button>
     </form>
-
-
 </x-vista-principal>

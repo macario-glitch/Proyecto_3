@@ -1,12 +1,36 @@
 <x-vista-principal>
 
-    <h1>Contenido del Pedido</h1>
+    <h1>Contenido del Pedido</h1> <br>
 
-    <h2>Productos:</h2>
-    <ul>
-        @foreach ($productos as $producto)
-        <li>{{ $producto->nombre }} - {{ $producto->precio }} - <a href="{{ route('productos.show', $producto->id) }}">Info...</a></li>
-        @endforeach
-    </ul>
+    @if($productos->isnotEmpty() && $pp_info->isnotEmpty())
+    <h2>Pedidos:</h2>
+
+    <table class="table-fixed w-full table">
+        <thead>
+            <tr>
+                <th>Nombre del Producto</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Información del Producto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($productos as $pedido)
+            <tr>
+                <td>{{ $pedido->nombre }}</td>
+                @foreach ($pp_info as $detalle)
+                @if ($detalle->id_producto === $pedido->id)
+                <td>{{ $detalle->cantidad }}</td>
+                <td>$ {{ $detalle->subtotal }}</td>
+                <th><a href="{{ route('productos.show', $detalle->id_producto) }}">Info..</a></th>
+                @endif
+                @endforeach
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @else
+    <h3>Error</h3>
+    @endif
 
 </x-vista-principal>

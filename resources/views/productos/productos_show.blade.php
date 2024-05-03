@@ -6,9 +6,10 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Precio</th>
+                <th>Descripción</th>
+                <th>Imagen</th>
                 <th>Creado</th>
                 <th>Modificaciones</th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -16,16 +17,11 @@
             <tr>
                 <td>{{ $pro->id }}</td>
                 <td>{{ $pro->nombre }}</td>
-                <td>{{ $pro->precio }}</td>
+                <td>$ {{ $pro->precio }}</td>
+                <td>{{$pro->descripcion}}</td>
+                <td><img class="img-fluid" width="150" src="/storage/{{ $pro->photo_path }}" alt="Pedido"></td>
                 <td>{{ $pro->created_at? $pro->created_at->format('d/m/Y H:i:s') : '-' }}</td>
                 <td>{{ $pro->updated_at? $pro->updated_at->diffForHumans() : '-' }}</td>
-                <td>
-                    <form action="{{ route('productos.destroy', $pro->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Borrar</button>
-                    </form>
-                </td>
             </tr>
             @else
             <tr>

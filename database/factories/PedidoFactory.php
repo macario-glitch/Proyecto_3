@@ -20,7 +20,7 @@ class PedidoFactory extends Factory
         $user = User::inRandomOrder()->first();
 
         return [
-            'total' => $this->faker->randomFloat(2),
+            'total' => $this->faker->randomFloat(2, 5.00, 1000.00),
             'id_usuario' => $user->id,
         ];
     }
