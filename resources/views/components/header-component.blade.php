@@ -15,15 +15,21 @@
             <ul class="d-flex align-items-center">
                 <li class="nav-item dropdown pe-5">
                     @auth <!-- Si el usuario está autenticado -->
-                        @livewire("opciones-perfil")
+                    @livewire("opciones-perfil")
                     @else
-                        <!-- Si el usuario no está autenticado -->
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <i class="bi bi-box-arrow-in-right"></i>
-                            <span>Iniciar sesión</span>
-                        </a>
-                    @endauth
+                    <!-- Si el usuario no está autenticado -->
+                    <a class="nav-link" href="{{ route('login') }}">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        <span>Iniciar sesión</span>
+                    </a>
                 </li>
+                <li>
+                    <a class="nav-link" style="margin-right:1vw;" href="{{ route('register') }}">
+                        <i class="bi bi-clipboard-plus"></i>
+                        <span>Registrarme</span>
+                    </a>
+                </li>
+                @endauth
             </ul>
         </nav>
     </header>

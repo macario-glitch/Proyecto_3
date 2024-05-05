@@ -27,9 +27,5 @@ class AppServiceProvider extends ServiceProvider
             return $user->role === 'Admin';
         });
 
-
-        /*Gate::define('isCliente', function (User $user) {
-            return $user->role === 'Cliente';
-        });*/
     }
 }

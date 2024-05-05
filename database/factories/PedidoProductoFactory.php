@@ -24,8 +24,8 @@ class PedidoProductoFactory extends Factory
         return [
             'id_pedido' => $pedido->id,
             'id_producto' => $producto->id,
-            'cantidad' => $this->faker->randomDigit(),
-            'subtotal' => $this->faker->randomFloat(2),
+            'cantidad' => $this->faker->numberBetween(1, 9),
+            'subtotal' => $this->faker->randomFloat(2, 5.00, 1000.00),
         ];
     }
 }

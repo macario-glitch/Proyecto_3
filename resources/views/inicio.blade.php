@@ -17,7 +17,7 @@
 
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 text-center border border-2 border-dark rounded border" style="background-color: rgb( 246, 255, 178 ); margin-bottom:2%; position: relative;">
                 <h3 style="padding-top: 5vh; padding-bottom: 10vh;">ORDENA YA !!</h3>
-                <button type="button" class="btn btn-light border border-2 border-dark rounded border" style="margin-bottom: 1vh; padding: 2%; font-size:larger; position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">PEDIDOS</button>
+                <a href="{{ route('menu.index') }}" class="btn btn-light border border-2 border-dark rounded border" style="margin-bottom: 1vh; padding: 2%; font-size:larger; position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">PEDIDOS</a>
                 <img src="{{ asset('NiceAdmin/assets/img/pedido_intro.png') }}" alt="Cake" class="img-fluid" style="max-width: 300px; position: relative; z-index: 0;">
             </div>
 

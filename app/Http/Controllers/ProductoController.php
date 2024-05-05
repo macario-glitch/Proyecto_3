@@ -62,7 +62,6 @@ class ProductoController extends Controller
      */
     public function show($id) //Index Producto
     {
-        $this->authorize('isAdmin');
         $pro = Producto::find($id);
         return view('productos.productos_show', compact('pro'));
     }

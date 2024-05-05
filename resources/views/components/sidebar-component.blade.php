@@ -10,11 +10,20 @@
             </li>
 
             <li class="nav-item"> <!-- Pedidos -->
-                <a class="nav-link {{ request()->routeIs('pedidos.*') ? '' : 'collapsed' }}" href="/pedidos">
+                <a class="nav-link {{ request()->routeIs('menu.index') ? '' : 'collapsed' }}" href="/menu">
                     <i class="bi bi-bag-fill"></i>
                     <span>Pedidos</span>
                 </a>
             </li>
+
+            @if(auth()->user())
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('menu.show') ? '' : 'collapsed' }}" href="/menu/carrito">
+                    <i class="bi bi-send-fill"></i>
+                    <span>Mi Carrito</span>
+                </a>
+            </li>
+            @endif
 
             <li class="nav-item"> <!-- Quejas -->
                 <a class="nav-link {{ request()->routeIs('quejas.index') ? '' : 'collapsed' }}" href="/quejas">
