@@ -12,7 +12,7 @@ use App\Http\Controllers\MenuController;
 
 Route::get('/', function () {
     return view('inicio');
-});
+})->name("ini");
 
 Route::get('/inicio', function() {
     return view('inicio');

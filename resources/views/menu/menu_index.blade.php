@@ -17,7 +17,7 @@
     </div>
     @endif
     <br>
-    Mostrar la lista de productos
+
 
     <form action="{{ route('menu.guardar') }}" method="POST">
         @csrf
@@ -27,7 +27,7 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="checkbox" id="producto{{ $producto->id }}" name="producto[]" value="{{ $producto->id }}" data-precio="{{ $producto->precio }}">
+                            <input type="checkbox" id="producto{{ $producto->id }}" name="productos[{{ $producto->id }}][selected]" value="1" data-precio="{{ $producto->precio }}" @if(old('productos.'.$producto->id.'.selected', 0) == 1) checked @endif>
                         </div>
                     </div>
                     <label for="producto{{ $producto->id }}" class="form-control">
@@ -37,7 +37,7 @@
                     </label>
                     <div class="cantidad-container input-group-append">
                         <label for="cantidad{{ $producto->id }}" class="input-group-text">Cantidad:</label>
-                        <input type="number" id="cantidad{{ $producto->id }}" name="cantidad[]" value="1" min="1" class="form-control">
+                        <input type="number" id="cantidad{{ $producto->id }}" name="productos[{{ $producto->id }}][cantidad]" value="1" min="1" max="9" class="form-control">
                     </div>
                 </div>
             </li>
@@ -55,38 +55,26 @@
         document.addEventListener("DOMContentLoaded", function() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
+                const hiddenInput = checkbox.nextElementSibling;
                 checkbox.addEventListener('change', function() {
-                    const cantidadContainer = this.parentElement.querySelector('.cantidad-container');
+                    hiddenInput.value = this.checked ? 1 : 0;
+                    const cantidadContainer = this.parentElement.parentElement.querySelector('.cantidad-container');
                     cantidadContainer.style.display = this.checked ? 'block' : 'none';
-                    recalcularTotal();
                 });
             });
 
-            const cantidadInputs = document.querySelectorAll('input[name="cantidad[]"]');
+            const cantidadInputs = document.querySelectorAll('input[name^="productos["][name$="][cantidad]"]');
             cantidadInputs.forEach(input => {
                 input.addEventListener('input', function() {
                     const precio = parseFloat(this.parentElement.parentElement.querySelector('.input-group-text input[type="checkbox"]').dataset.precio);
                     const cantidad = parseInt(this.value);
                     const subtotal = precio * cantidad;
                     this.parentElement.parentElement.querySelector('.precio').textContent = subtotal.toFixed(2);
-                    recalcularTotal();
                 });
             });
-
-            // Función para recalcular el total sumando los subtotales
-            function recalcularTotal() {
-                let total = 0;
-                const subtotales = document.querySelectorAll('.precio');
-                subtotales.forEach(subtotalElement => {
-                    total += parseFloat(subtotalElement.textContent);
-                });
-                document.getElementById('total').value = total.toFixed(2);
-            }
-
-            // Llamar a la función recalcularTotal al cargar la página
-            recalcularTotal();
         });
     </script>
+
 
 
 </x-vista-principal>

@@ -12,10 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            /*$table->enum('role', ['Cliente', 'Admin'])->default('Cliente')
-            ->after('password');*/
-            /*$table->text('two_factor_secret')
+        /*Schema::table('users', function (Blueprint $table) { //Descomentra al momento de migrar y factory y volver a comentar
+            $table->text('two_factor_secret')
                 ->after('password')
                 ->nullable();
 
@@ -27,8 +25,8 @@ return new class extends Migration
                 $table->timestamp('two_factor_confirmed_at')
                     ->after('two_factor_recovery_codes')
                     ->nullable();
-            }*/
-        });
+            }
+        });*/
     }
 
     /**

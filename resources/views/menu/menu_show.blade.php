@@ -11,8 +11,9 @@
     @endif
 
     @if($pedidos->isNotEmpty())
+    @php($contador = 1)
     @foreach ($pedidos as $pedido)
-    <h2>Pedido {{ $pedido->id }} | Total: ${{ $pedido->total }}</h2> <br>
+    <h2>Pedido {{ $contador }} | Total: ${{ $pedido->total }}</h2> <br>
     <form action="{{ route('menu.destroy', $pedido->id) }}" method="POST">
         @csrf
         @method('DELETE')
@@ -32,14 +33,15 @@
             @foreach ($pedido->productos as $producto)
             <tr>
                 <td>{{ $producto->nombre }}</td>
-                <td>{{ $infoPivot[$pedido->id][$producto->id]['cantidad'] ?? 'Cantidad no disponible' }}</td>
-                <td>${{ $infoPivot[$pedido->id][$producto->id]['subtotal'] ?? 'Subtotal no disponible' }}</td>
+                <td>{{ $infoPivot[$pedido->id][$producto->id]['cantidad']?? 'Cantidad no disponible' }}</td>
+                <td>${{ $infoPivot[$pedido->id][$producto->id]['subtotal']?? 'Subtotal no disponible' }}</td>
                 <td><a href="{{ route('productos.show', $producto->id) }}">Info..</a></td>
             </tr>
             @endforeach
         </tbody>
     </table>
     <br><br>
+    @php($contador++)
     @endforeach
     @else
     <h3>No hay pedidos</h3>

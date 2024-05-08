@@ -2,6 +2,8 @@
     <!-- Sidebar -->
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
+
+            @if(auth()->user())
             <li class="nav-item"> <!-- Principal -->
                 <a class="nav-link {{ request()->routeIs('inicio') ? '' : 'collapsed' }}" href="/inicio">
                     <i class="bi bi-cake2-fill"></i>
@@ -9,10 +11,19 @@
                 </a>
             </li>
 
+            @else
+            <li class="nav-item"> <!-- Principal -->
+                <a class="nav-link {{ request()->routeIs('ini') ? '' : 'collapsed' }}" href="/">
+                    <i class="bi bi-cake2-fill"></i>
+                    <span>Página Principal</span>
+                </a>
+            </li>
+            @endif
+
             <li class="nav-item"> <!-- Pedidos -->
                 <a class="nav-link {{ request()->routeIs('menu.index') ? '' : 'collapsed' }}" href="/menu">
                     <i class="bi bi-bag-fill"></i>
-                    <span>Pedidos</span>
+                    <span>Compra en Linea</span>
                 </a>
             </li>
 

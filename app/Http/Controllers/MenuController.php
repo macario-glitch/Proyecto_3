@@ -20,27 +20,48 @@ class MenuController extends Controller
 
     public function guardar(Request $request)
     {
+        // Obtener los productos seleccionados del formulario
+        $productos = $request->input('productos');
+        //dd($productos);
+
+        // Validar que se hayan seleccionados productos
+
+        $productosSeleccionados = array_filter($productos, function ($producto) {
+            return isset($producto['selected']) && $producto['selected'] == 1;
+        });
+
+        if (empty($productosSeleccionados)) {
+            return redirect()->route('menu.index')->with('alert', '¡No has seleccionado ningún producto!');
+        }
+
+
         // Crear un nuevo pedido
         $pedido = new Pedido();
         $pedido->id_usuario = auth()->id(); // Asignar el ID del usuario actual.
-        if ($request->total == 0)
-            return redirect()->route('menu.index')->with('alert', '¡No hay producto que guardar!');
-        $pedido->total = $request->total;
+        $pedido->total = 0; // Inicializar el total en 0
         $pedido->save();
 
-        // Obtener los productos seleccionados del formulario
-        $productos = $request->input('producto');
-        $cantidades = $request->input('cantidad');
+        $total = 0; // Variable para almacenar el total calculado
 
         // Iterar sobre los productos y guardarlos en la tabla pedido_productos
-        foreach ($productos as $key => $productoId) {
-            $pedidoProducto = new PedidoProducto();
-            $pedidoProducto->id_pedido = $pedido->id; // Asignar el ID del pedido creado anteriormente
-            $pedidoProducto->id_producto = $productoId;
-            $pedidoProducto->cantidad = $cantidades[$key];
-            $pedidoProducto->subtotal = $cantidades[$key] * Producto::find($productoId)->precio; // Calcular el subtotal multiplicando la cantidad por el precio del producto
-            $pedidoProducto->save();
+        foreach ($productos as $productoId => $productoData) {
+            if (isset($productoData['selected']) && $productoData['selected'] == 1) {
+                $pedidoProducto = new PedidoProducto();
+                $pedidoProducto->id_pedido = $pedido->id; // Asignar el ID del pedido creado anteriormente
+                $pedidoProducto->id_producto = $productoId;
+                $pedidoProducto->cantidad = $productoData['cantidad'];
+                $precioProducto = Producto::find($productoId)->precio; // Obtener el precio del producto
+                $pedidoProducto->subtotal = $productoData['cantidad'] * $precioProducto; // Calcular el subtotal multiplicando la cantidad por el precio del producto
+                $pedidoProducto->save();
+
+                // Sumar el subtotal al total
+                $total += $pedidoProducto->subtotal;
+            }
         }
+
+        // Actualizar el total en el pedido con el total calculado
+        $pedido->total = $total;
+        $pedido->save();
 
         return redirect()->route('menu.index')->with('success', '¡Pedido guardado con éxito!');
     }
@@ -77,5 +98,4 @@ class MenuController extends Controller
         session()->flash('success');
         return redirect()->route('menu.show')->with('success', 'Pedido eliminado exitosamente');
     }
-
 }
