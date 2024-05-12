@@ -20,11 +20,10 @@ class PedidoController extends Controller
     public function show($usuario_id) //Index User
     {
         $this->authorize('isAdmin');
-        $usuario = User::find($usuario_id);
-        $pedidos_info = $usuario->pedidos;
+        $usuario = User::with('pedidos')->find($usuario_id);
         $nombre = $usuario->name;
         
-        return view('pedidos.pedidos_show', compact('pedidos_info', 'nombre'));
+        return view('pedidos.pedidos_show', compact('usuario', 'nombre'));
     }
 
     public function destroy($pedido_id)

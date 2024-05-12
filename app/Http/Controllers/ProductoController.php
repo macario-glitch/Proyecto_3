@@ -87,7 +87,7 @@ class ProductoController extends Controller
 
         $request->validate([
             'nombre' => 'required|string|min:5|max:255',
-            'precio' => 'required|numeric|between:5,500',
+            'precio' => 'required|numeric|between:5,1000',
             'descripcion' => 'required|string|min:5|max:255',
             'photo_path' => 'nullable|image'
         ]);

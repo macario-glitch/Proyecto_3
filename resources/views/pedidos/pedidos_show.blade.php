@@ -2,7 +2,7 @@
 
     <h1>{{ $nombre }}</h1> <br>
 
-    @if($pedidos_info->isnotEmpty())
+    @if($usuario->pedidos->isnotEmpty())
     <h2>Pedidos:</h2>
 
     <table class="table-fixed w-full table">
@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($pedidos_info as $pedido)
+            @foreach ($usuario->pedidos as $pedido)
             <tr>
                 <td>{{ $pedido->id }}</td>
                 <td>$ {{ $pedido->total }}</td>
