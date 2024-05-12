@@ -1,6 +1,6 @@
 <x-vista-principal>
 
-    <h1>Clientes & Pedidos 1:M, Pedido & Producto M:N</h1>
+    <h1>Users & Pedidos 1:M, Pedidos & Productos M:N</h1>
 
     @if(session('success'))
     <br>

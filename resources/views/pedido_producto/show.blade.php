@@ -2,8 +2,8 @@
 
     <h1>Contenido del Pedido</h1> <br>
 
-    @if($productos->isnotEmpty() && $pp_info->isnotEmpty())
-    <h2>Pedidos:</h2>
+    @if($pp_info->isnotEmpty())
+    <h2>Total: $ {{$pedido_info->total}}</h2>
 
     <table class="table-fixed w-full table">
         <thead>
@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($productos as $pedido)
+            @foreach ($pedido_info->productos as $pedido)
             <tr>
                 <td>{{ $pedido->nombre }}</td>
                 @foreach ($pp_info as $detalle)
